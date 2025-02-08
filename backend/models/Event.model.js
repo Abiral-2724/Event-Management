@@ -50,20 +50,9 @@ const eventSchema = new mongoose.Schema({
     required:true 
   },
   attendees: [{
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
-    },
-    status: {
-      type: String,
-      enum: ['confirmed', 'pending', 'cancelled'],
-      default: 'pending'
-    },
-    joinedAt: {
-      type: Date,
-      default: Date.now
-    }
-  }],
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    joinedAt: { type: Date, default: Date.now }
+}],
   isPublic: {
     type: Boolean,
     default: true

@@ -143,6 +143,57 @@ export const getAllEvents = async (req, res) => {
   }
 };
 
+export const getEventsByUserId = async (req, res) => {
+    try {
+      const userId = req.params.userId;
+      const page = parseInt(req.query.page) || 1;
+      const limit = parseInt(req.query.limit) || 10;
+      const skip = (page - 1) * limit;
+      
+      if (!userId) {
+        return res.status(400).json({ error: 'User ID is required' });
+      }
+  
+      const query = { 
+        owner: userId
+      };
+  
+      // If the requesting user is the owner, show all their events
+      // If not, only show published events
+      if (req.id !== userId) {
+        query.status = 'published';
+      }
+  
+      const events = await Event.find(query)
+        .populate('owner', 'name email')
+        .sort({ startDate: -1, startTime: -1 })
+        .skip(skip)
+        .limit(limit);
+  
+      const total = await Event.countDocuments(query);
+  
+      if (events.length === 0) {
+        return res.status(404).json({ message: 'No events found for this user' });
+      }
+  
+      res.status(200).json({
+        events,
+        currentPage: page,
+        totalPages: Math.ceil(total / limit),
+        totalEvents: total
+      });
+      
+    } catch (error) {
+      console.error('Error in getEventsByUserId:', error);
+      
+      // Handle invalid ID format error
+      if (error.name === 'CastError') {
+        return res.status(400).json({ error: 'Invalid user ID format' });
+      }
+      
+      res.status(500).json({ error: 'Internal server error', details: error.message });
+    }
+  };
 
 // Advanced search with multiple filters
 
@@ -293,6 +344,82 @@ export const searchEvents = async (req, res) => {
     });
   }
 };
+
+export const joinEvent = async (req, res) => {
+    try {
+      // Validate request
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      }
+  
+      const eventId = req.params.eventId;
+      const userId = req.id; // From auth middleware
+  
+      // Check if event exists
+      const event = await Event.findById(eventId);
+      if (!event) {
+        return res.status(404).json({ error: 'Event not found' });
+      }
+  
+      // Check if event is published
+      if (event.status !== 'published') {
+        return res.status(400).json({ error: 'Cannot join an unpublished event' });
+      }
+  
+      // Check if event has already started
+      const eventStartDateTime = moment.tz(
+        `${event.startDate} ${event.startTime}`,
+        "YYYY-MM-DD HH:mm",
+        event.timezone
+      ).toDate();
+  
+      if (eventStartDateTime < new Date()) {
+        return res.status(400).json({ error: 'Cannot join an event that has already started' });
+      }
+  
+      // Check if user is the event owner
+      if (event.owner.toString() === userId) {
+        return res.status(400).json({ error: 'Event owner cannot join their own event as a participant' });
+      }
+  
+      // Check if user is already a participant
+      if (event.participants?.includes(userId)) {
+        return res.status(400).json({ error: 'User is already a participant in this event' });
+      }
+  
+      // Check capacity
+      if (event.participants?.length >= event.capacity) {
+        return res.status(400).json({ error: 'Event has reached maximum capacity' });
+      }
+  
+      // Add user to participants array
+      if (!event.participants) {
+        event.participants = [];
+      }
+      
+      event.participants.push(userId);
+      await event.save();
+  
+      // Populate owner and participants details
+      await event.populate('owner', 'name email');
+      await event.populate('attendees', 'userId');
+  
+      res.status(200).json({
+        message: 'Successfully joined the event',
+        event
+      });
+  
+    } catch (error) {
+      console.error('Error in joinEvent:', error);
+      
+      if (error.name === 'CastError') {
+        return res.status(400).json({ error: 'Invalid event ID format' });
+      }
+      
+      res.status(500).json({ error: 'Internal server error', details: error.message });
+    }
+  };
 
 // Helper function to validate time format (HH:mm)
 const isValidTimeFormat = (time) => {

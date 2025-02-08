@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import Login from './pages/login'
 import Signup from './pages/Signup'
 import CreateEvent from './pages/CreateEvent'
+import Explore from './pages/Explore'
 
 function App() {
 
@@ -22,6 +23,9 @@ function App() {
     },{
       path:'/create-event',
       element:<CreateEvent></CreateEvent>
+    },{
+      path:'/explore' ,
+      element:<Explore></Explore>
     }
   ])
   
