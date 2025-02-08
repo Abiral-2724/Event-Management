@@ -1,6 +1,5 @@
-const mongoose = require('mongoose');
-
-const EventSchema = new mongoose.Schema({
+import mongoose from "mongoose";
+const eventSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -10,9 +9,26 @@ const EventSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  date: {
+  startDate: {
     type: Date,
     required: true
+  },
+  endDate: {
+    type: Date,
+    required: true
+  },
+  startTime: {
+    type: String,  // Store as "HH:mm" format
+    required: true
+  },
+  endTime: {
+    type: String,  // Store as "HH:mm" format
+    required: true
+  },
+  timezone: {
+    type: String,
+    required: true,
+    default: 'UTC'
   },
   location: {
     type: String,
@@ -20,40 +36,66 @@ const EventSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ['Conference', 'Workshop', 'Meetup', 'Seminar', 'Other'],
-    default: 'Other'
+    required: true,
+    enum: ['Conference', 'Workshop', 'Social', 'Tech', 'Music', 'Business']
+  },
+  capacity: {
+    type: Number,
+    required: true,
+    min: 1
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    required:true 
   },
   attendees: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    },
+    status: {
+      type: String,
+      enum: ['confirmed', 'pending', 'cancelled'],
+      default: 'pending'
+    },
+    joinedAt: {
+      type: Date,
+      default: Date.now
+    }
   }],
-  maxAttendees: {
-    type: Number,
-    default: 100
+  isPublic: {
+    type: Boolean,
+    default: true
+  },
+  tags: [{
+    type: String,
+    trim: true
+  }],
+  typeofevent: {
+    type: String,
+    enum: ['Free', 'Paid'],
+    default: 'Free'
   },
   status: {
     type: String,
-    enum: ['Upcoming', 'Ongoing', 'Completed'],
-    default: 'Upcoming'
+    enum: ['draft', 'published', 'cancelled', 'completed'],
+    default: 'published'
+  },
+  eventcoverimage: {
+    type: String,
+    default: ""
   }
-}, { 
-  timestamps: true 
+}, {
+  timestamps: true
 });
 
-// Middleware to update event status
-EventSchema.pre('save', function(next) {
-  const now = new Date();
-  if (this.date < now) {
-    this.status = 'Completed';
-  } else if (this.date <= now && this.date > now - 24 * 60 * 60 * 1000) {
-    this.status = 'Ongoing';
+// Pre-save hook to ensure capacity isn't exceeded
+eventSchema.pre('save', function (next) {
+  if (this.attendees.length > this.capacity) {
+    return next(new Error('Attendee count exceeds event capacity'));
   }
   next();
 });
 
-module.exports = mongoose.model('Event', EventSchema);
+export const Event = mongoose.model('Event', eventSchema);

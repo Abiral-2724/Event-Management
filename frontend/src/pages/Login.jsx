@@ -32,9 +32,10 @@ const LoginForm = () => {
       const response = await axios.post('http://localhost:8000/api/v1/user/login', formData, {
         withCredentials: true,
       });
-
-      const { user, message } = response.data;
+      console.log(response.data);
+      const { user,token, message } = response.data;
       localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('token',token);
       localStorage.setItem('isAuthenticated', 'true');
       toast.success(`🚀 ${message}`);
       navigate('/');
@@ -55,10 +56,11 @@ const LoginForm = () => {
       const response = await axios.post('http://localhost:8000/api/v1/user/guestlogin', {}, {
         withCredentials: true,
       });
-
-      const { user, message } = response.data;
+      console.log(response.data);
+      const { user,token, message } = response.data;
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('isAuthenticated', 'true');
+      localStorage.setItem('token',token);
       localStorage.setItem('isGuest', 'true');
       toast.success(`🎉 ${message}`);
       navigate('/');

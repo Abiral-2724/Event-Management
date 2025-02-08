@@ -4,6 +4,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import connectDB from './utils/db.js';
 import userRoute from './routes/user.route.js';
+import eventRoute from './routes/event.route.js' ;
 dotenv.config({});
 
 
@@ -27,6 +28,7 @@ allowedHeaders: ['Content-Type', 'Authorization']
 
 
 app.use("/api/v1/user", userRoute);
+app.use("/api/v1/event", eventRoute);
 
 // Start server
 app.listen(PORT, () => {

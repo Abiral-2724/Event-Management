@@ -37,4 +37,5 @@ const userSchema = new mongoose.Schema({
     ref: 'Event'
   }]
 }, { timestamps: true });
+
 export const User = mongoose.model('User', userSchema);
