@@ -69,9 +69,9 @@ const Navbar = () => {
               to="/" 
               className="flex-shrink-0 flex items-center group"
             >
-              <h1 className="text-2xl font-bold text-primary transition-transform duration-200 
+              <h1 className="text-3xl font-serif text-primary transition-transform duration-200 
                 group-hover:scale-105">
-                Your Brand
+                Eventify 
               </h1>
             </Link>
           </div>
