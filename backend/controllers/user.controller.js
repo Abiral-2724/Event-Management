@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-// import getDataUri from "../utils/datauri.js";
-// import cloudinary from "../utils/cloudinary.js";
+import getDataUri from "../utils/datauri.js";
+import cloudinary from "../utils/cloudinary.js";
 import { User } from "../models/User.model.js";
 
 export const register = async (req, res) => {
@@ -14,9 +14,9 @@ export const register = async (req, res) => {
                 success: false
             });
         };
-        // const file = req.file;
-        // const fileUri = getDataUri(file);
-        // const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+        const file = req.file;
+        const fileUri = getDataUri(file);
+        const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
 
         const user = await User.findOne({ email });
         if (user) {
@@ -32,9 +32,8 @@ export const register = async (req, res) => {
             username,
             email,
             password: hashedPassword,
-            // profile:{
-            //     profilePhoto:cloudResponse.secure_url,
-            // }
+            profilePhoto:cloudResponse.secure_url,
+            
         });
 
         return res.status(201).json({
