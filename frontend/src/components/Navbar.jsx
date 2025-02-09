@@ -21,7 +21,7 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.get('http://localhost:8000/api/v1/user/logout', {}, {
+      await axios.get('https://event-management-bj0d.onrender.com/api/v1/user/logout', {}, {
         withCredentials: true
       });
       
