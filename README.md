@@ -1,29 +1,21 @@
-.env file
-``
+## Environment Variables
+
+To run this project, create a `.env` file in the root directory and add the following variables:
+
+```ini
+# MongoDB Configuration
 MONGO_URI=
-``
-``
-PORT=
-``
-``
-MONGO_PASSWORD=
-``
-``
 MONGO_USERNAME=
-``
-``
+MONGO_PASSWORD=
+
+# Server Configuration
+PORT=
+
+# Authentication
 JWT_SECRET=
-``
-``
 SECRET_KEY=
-``
-``
+
+# Cloudinary Configuration
 CLOUDINARY_CLOUD_NAME=
-``
-``
 CLOUDINARY_API_KEY=
-``
-``
 CLOUDINARY_API_SECRET=
-``
-``
