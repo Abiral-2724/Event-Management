@@ -38,6 +38,15 @@ To run the backend
 npm run dev
 ```
 
+## To try the website 
+```ini
+Email = test@gmail.com
+Password = 123456
+```
+
+
+
+
 
 
 
