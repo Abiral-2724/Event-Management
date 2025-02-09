@@ -2,7 +2,7 @@ import React from 'react';
 import { Calendar, Users, Gift, Music, Camera, Utensils, Award, Clock, ArrowRight } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import Navbar from '../components/Navbar';
-import Footer from '../components/footer';
+import Footer from '../components/Footer';
 
 const Services = () => {
   const mainServices = [

@@ -3,7 +3,7 @@ import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { User, Mail, Phone, Calendar, MapPin, Edit, UserCheck, Camera } from 'lucide-react';
 import Navbar from '../components/Navbar';
-import Footer from '../components/footer';
+import Footer from '../components/Footer';
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);

@@ -20,7 +20,7 @@ import {
 } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import { toast } from 'react-toastify';
-import Footer from '../components/footer';
+import Footer from '../components/Footer';
 
 const EventsExplorer = () => {
   const [activeTab, setActiveTab] = useState('all');

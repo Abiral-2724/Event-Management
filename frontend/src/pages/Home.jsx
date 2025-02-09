@@ -4,7 +4,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Calendar, Users, MapPin, PartyPopper, Trophy, Music, ArrowRight, Star, Clock } from "lucide-react";
 import Navbar from '../components/Navbar';
 import { useNavigate } from 'react-router-dom';
-import Footer from '../components/footer';
+import Footer from '../components/Footer';
+
+
 
 const Homepage = () => {
     const navigate = useNavigate() ;

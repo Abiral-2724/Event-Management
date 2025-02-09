@@ -2,7 +2,7 @@ import React from 'react';
 import { Check } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Navbar from '../components/Navbar';
-import Footer from '../components/footer';
+import Footer from '../components/Footer';
 
 const Pricing = () => {
   const tiers = [
