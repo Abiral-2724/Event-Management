@@ -89,7 +89,7 @@ console.log('token = ',token) ;
             formDataToSend.append('eventcoverimage', coverImage);
         }
 
-        const response = await axios.post('http://localhost:8000/api/v1/event/create', formDataToSend, {
+        const response = await axios.post('https://event-management-bj0d.onrender.com/api/v1/event/create', formDataToSend, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'Authorization': `Bearer ${token}` // Add Authorization header

@@ -57,9 +57,9 @@ const EventsExplorer = () => {
       });
 
       if (activeTab === 'my-events') {
-        endpoint = `http://localhost:8000/api/v1/event/${currentUser._id}/events`;
+        endpoint = `https://event-management-bj0d.onrender.com/api/v1/event/${currentUser._id}/events`;
       } else if (Object.values(filters).some(value => value && value !== 'all')) {
-        endpoint = 'http://localhost:8000/api/v1/event/search';
+        endpoint = 'https://event-management-bj0d.onrender.com/api/v1/event/search';
         Object.entries(filters).forEach(([key, value]) => {
           if (value && value !== 'all') {
             if (key === 'startDate' || key === 'endDate') {
@@ -74,7 +74,7 @@ const EventsExplorer = () => {
         if (activeTab === 'ongoing') queryParams.append('timeframe', 'ongoing');
         if (activeTab === 'past') queryParams.append('timeframe', 'past');
       } else {
-        endpoint = 'http://localhost:8000/api/v1/event/allevents';
+        endpoint = 'https://event-management-bj0d.onrender.com/api/v1/event/allevents';
       }
 
       const response = await axios.get(`${endpoint}${queryParams.toString() ? `?${queryParams}` : ''}`);
@@ -121,7 +121,7 @@ const EventsExplorer = () => {
       const token = localStorage.getItem('token');
       
       const response = await axios.post(
-        `http://localhost:8000/api/v1/event/${eventId}/join`,
+        `https://event-management-bj0d.onrender.com/api/v1/event/${eventId}/join`,
         {}, // Empty body as userId comes from auth token
         {
           headers: {

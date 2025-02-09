@@ -14,7 +14,7 @@ const app = express() ;
 const _dirname = path.resolve() ;
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://event-management-bj0d.onrender.com',
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization']
 }));

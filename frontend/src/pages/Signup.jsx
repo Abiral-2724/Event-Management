@@ -56,7 +56,7 @@ const Signup = () => {
         });
 
         try {
-            const response = await axios.post('http://localhost:8000/api/v1/user/register', formDataToSend, {
+            const response = await axios.post('https://event-management-bj0d.onrender.com/api/v1/user/register', formDataToSend, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
             setSuccess(response.data.message);
@@ -74,7 +74,7 @@ const Signup = () => {
         setSuccess('');
         setLoading(true);
         try {
-            const response = await axios.post('http://localhost:8000/api/v1/user/guestlogin');
+            const response = await axios.post('https://event-management-bj0d.onrender.com/api/v1/user/guestlogin');
             setSuccess(response.data.message);
             toast.success('🚀 Welcome back');
             navigate('/');

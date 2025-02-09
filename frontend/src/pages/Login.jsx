@@ -29,7 +29,7 @@ const LoginForm = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:8000/api/v1/user/login', formData, {
+      const response = await axios.post('https://event-management-bj0d.onrender.com/api/v1/user/login', formData, {
         withCredentials: true,
       });
       console.log(response.data);
@@ -53,7 +53,7 @@ const LoginForm = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:8000/api/v1/user/guestlogin', {}, {
+      const response = await axios.post('https://event-management-bj0d.onrender.com/api/v1/user/guestlogin', {}, {
         withCredentials: true,
       });
       console.log(response.data);
