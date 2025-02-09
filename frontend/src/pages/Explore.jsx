@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import { toast } from 'react-toastify';
+import Footer from '../components/footer';
 
 const EventsExplorer = () => {
   const [activeTab, setActiveTab] = useState('all');
@@ -554,6 +555,7 @@ const EventsExplorer = () => {
           </Tabs>
         </div>
       </main>
+      <Footer></Footer>
     </div>
   );
 };

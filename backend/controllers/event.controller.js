@@ -59,7 +59,7 @@ export const createEvent = async (req, res) => {
       return res.status(400).json({ error: 'Invalid category' });
     }
 
-    let eventCoverImageUrl = null;
+    let eventCoverImageUrl = "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=2912&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
     // Process image upload if a file is provided
     if (req.file) {

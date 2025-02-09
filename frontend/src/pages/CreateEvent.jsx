@@ -11,6 +11,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Calendar, Upload, Clock, MapPin, Users, Tag, Type } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../components/footer';
 
 const CreateEventForm = () => {
     const navigate = useNavigate() ;
@@ -347,6 +348,7 @@ console.log('token = ',token) ;
           </CardContent>
         </Card>
       </div>
+      <Footer></Footer>
     </div>
   );
 };

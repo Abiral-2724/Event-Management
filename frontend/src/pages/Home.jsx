@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Calendar, Users, MapPin, PartyPopper, Trophy, Music, ArrowRight, Star, Clock } from "lucide-react";
 import Navbar from '../components/Navbar';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../components/footer';
 
 const Homepage = () => {
     const navigate = useNavigate() ;
@@ -14,7 +15,7 @@ const Homepage = () => {
       <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="/api/placeholder/1920/1080"
+            src="https://plus.unsplash.com/premium_vector-1683141200177-9575262876f7?q=80&w=2956&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Event venue"
             className="w-full h-full object-cover"
           />
@@ -109,6 +110,16 @@ const Homepage = () => {
           </div>
         </div>
       </section>
+      <section className="bg-primary text-white py-20">
+        <div className="max-w-4xl mx-auto text-center px-4">
+          <h2 className="text-3xl font-bold mb-6">Ready to Create Something Amazing?</h2>
+          <p className="text-xl mb-8">Let's bring your vision to life with our expert event planning services</p>
+          <Button size="lg" className="bg-white text-primary hover:bg-gray-100">
+            Get Started Today
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
+        </div>
+      </section>
 
       {/* Process Section */}
       <section className="py-20 bg-white">
@@ -134,16 +145,11 @@ const Homepage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-primary text-white py-20">
-        <div className="max-w-4xl mx-auto text-center px-4">
-          <h2 className="text-3xl font-bold mb-6">Ready to Create Something Amazing?</h2>
-          <p className="text-xl mb-8">Let's bring your vision to life with our expert event planning services</p>
-          <Button size="lg" className="bg-white text-primary hover:bg-gray-100">
-            Get Started Today
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
-        </div>
-      </section>
+      
+
+      <div>
+        <Footer></Footer>
+      </div>
     </main>
   );
 };

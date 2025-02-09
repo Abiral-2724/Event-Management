@@ -5,6 +5,10 @@ import Login from './pages/login'
 import Signup from './pages/Signup'
 import CreateEvent from './pages/CreateEvent'
 import Explore from './pages/Explore'
+import About from './pages/About'
+import Profile from './pages/Profile'
+import Pricing from './pages/Pricing'
+import Services from './pages/Services'
 
 function App() {
 
@@ -26,6 +30,18 @@ function App() {
     },{
       path:'/explore' ,
       element:<Explore></Explore>
+    },{
+      path:'/about',
+      element:<About></About>
+    },{
+      path:'/profile',
+      element:<Profile></Profile>
+    },{
+      path:'/pricing',
+      element:<Pricing></Pricing>
+    },{
+      path:'/services',
+      element:<Services></Services>
     }
   ])
   
