@@ -19,3 +19,25 @@ SECRET_KEY=
 CLOUDINARY_CLOUD_NAME=
 CLOUDINARY_API_KEY=
 CLOUDINARY_API_SECRET=
+```
+
+## Frontend
+
+To run the frontend
+
+```ini
+cd frontend
+npm run dev
+```
+
+## backend
+
+To run the backend
+
+```ini
+npm run dev
+```
+
+
+
+
